@@ -179,4 +179,7 @@ fun mutableList() {
 
     //Print each element of the list in a new line together with the index of the element (convert
     //the list to list with index using the withIndex() function!).
+    val indexMutableList = mutableDay.withIndex()
+    print("The indexed list is: \n")
+    indexMutableList.forEach{ println("Day at ${it.index} is ${it.value} \n") }
 }
