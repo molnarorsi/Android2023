@@ -30,6 +30,7 @@ fun main(args: Array<String>) {
            5 -> {
                printEvenNumbers((1..10).toList())
            }
+           6 -> mapOperations()
        }
    }
 }
@@ -118,3 +119,17 @@ fun messageCoding(msg: String, func: (String) -> String): String {
 
 //-------------EXERCISE 5.-------------//
 fun printEvenNumbers(numbers: List<Int>) = numbers.filter { it % 2 == 0 }.forEach { print(it) }
+
+//-------------EXERCISE 6.-------------//
+fun mapOperations() {
+    val integers = (1..5).toList()
+    print("The numbers are: $integers")
+    println("\nThe doubled numbers are: ${doubleListElements(integers)}")
+}
+
+
+//Double the elements of a list of integers and print it.
+fun doubleListElements(numbers: List<Int>) = numbers.map { it * 2 }
+
+
+//Print the days of week capitalized (e.g. MONDAY for Monday)
