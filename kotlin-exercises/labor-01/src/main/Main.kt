@@ -31,6 +31,7 @@ fun main(args: Array<String>) {
                printEvenNumbers((1..10).toList())
            }
            6 -> mapOperations()
+           7 -> mutableList()
        }
    }
 }
@@ -162,4 +163,20 @@ fun firstChar(list: List<String>) {
 //Print the length of days (number of characters, e.g. Monday → 6)
 fun lengthOfDay(list: List<String>) {
     list.map{Pair(it.length, it)}.forEach{println("${it.first} -> ${it.second}")}
+}
+
+//-------------EXERCISE 7.-------------//
+
+fun mutableList() {
+    val dayOfWeek = listOf("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday")
+
+    //Convert the daysOfWeek immutable list into a mutable one. Remove all days containing
+    //the letter ‘n’, then print the mutable list.
+    val mutableDay = dayOfWeek.toMutableList()
+    mutableDay.removeAll{it.contains("n")}
+    print("Days of week without letter N: \n")
+    mutableDay.forEach{print("$it ")}
+
+    //Print each element of the list in a new line together with the index of the element (convert
+    //the list to list with index using the withIndex() function!).
 }
