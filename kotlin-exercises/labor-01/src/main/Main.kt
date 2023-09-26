@@ -182,4 +182,9 @@ fun mutableList() {
     val indexMutableList = mutableDay.withIndex()
     print("The indexed list is: \n")
     indexMutableList.forEach{ println("Day at ${it.index} is ${it.value} \n") }
+
+    //Sort the result list alphabetically!
+    mutableDay.sort()
+    println("\nDays sorted alphabetically: \n")
+    mutableDay.forEach{print("$it \n")}
 }
