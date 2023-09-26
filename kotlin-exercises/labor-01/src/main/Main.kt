@@ -125,6 +125,23 @@ fun mapOperations() {
     val integers = (1..5).toList()
     print("The numbers are: $integers")
     println("\nThe doubled numbers are: ${doubleListElements(integers)}")
+
+    val dayOfWeek = listOf("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday")
+    print("\nThe days of the week capitalized: ")
+    capitalize(dayOfWeek)
+    print("\n")
+
+    print("\nFirst character of each day is: ")
+    firstChar(dayOfWeek)
+    print("\n")
+
+    print("\nThe length of each day is: \n")
+    lengthOfDay(dayOfWeek)
+    print("\n")
+
+//Compute the average length of days (in number of characters)
+    val avg = dayOfWeek.map {it.length}.average()
+    println("\nThe average length of each day is: $avg\n")
 }
 
 
@@ -133,3 +150,16 @@ fun doubleListElements(numbers: List<Int>) = numbers.map { it * 2 }
 
 
 //Print the days of week capitalized (e.g. MONDAY for Monday)
+fun capitalize(list: List<String>) {
+    list.map {it. uppercase()}.forEach{print("$it ")}
+}
+
+//Print the first character of each day capitalized (e.g. m for Monday)
+fun firstChar(list: List<String>) {
+    list.map {it. first().lowercase()}.forEach{print("$it ")}
+}
+
+//Print the length of days (number of characters, e.g. Monday → 6)
+fun lengthOfDay(list: List<String>) {
+    list.map{Pair(it.length, it)}.forEach{println("${it.first} -> ${it.second}")}
+}
