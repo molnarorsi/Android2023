@@ -41,14 +41,30 @@ fun daysList() {
     val daysOfWeek = listOf("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday")
     printListToConsole(daysOfWeek)
     startingWithLetter(daysOfWeek, "T")
+    containsLetter(daysOfWeek, "e")
+    dayOfLength(daysOfWeek, 6)
 }
 
 //Use a for loop that iterates over the list and prints the list to the standard output.
 fun printListToConsole(list: List<String>) {
+    println("List:\n")
     list.forEach(::println)
 }
 
 //Use a list filter to print the days starting with letter ‘T’
 fun startingWithLetter(list: List<String>, letter: String) {
-    list.filter { it.startsWith(letter) }.forEach({ println(it) })
+    println("\nDays starting with letter $letter:\n")
+    list.filter { it.startsWith(letter) }.forEach { println(it) }
+}
+
+//Use a list filter to print the days containing the letter ‘e’
+fun containsLetter(list: List<String>, letter: String) {
+    println("\nDays containing the letter $letter:\n")
+    list.filter { it.contains(letter) }.forEach { println(it) }
+}
+
+//Use a list filter to print all the days of length 6 (e.g. Friday)
+fun dayOfLength(list: List<String>, length: Int) {
+    println("\nDays with given length $length:")
+    list.filter { it.length == length }.forEach { println(it) }
 }
