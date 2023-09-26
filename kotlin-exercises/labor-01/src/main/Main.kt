@@ -23,6 +23,7 @@ fun main(args: Array<String>) {
                exitProcess(0)
            }
            1 -> stringTemplate()
+           2 -> daysList()
        }
    }
 }
@@ -36,3 +37,18 @@ fun stringTemplate() {
 }
 
 //-------------EXERCISE 2.-------------//
+fun daysList() {
+    val daysOfWeek = listOf("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday")
+    printListToConsole(daysOfWeek)
+    startingWithLetter(daysOfWeek, "T")
+}
+
+//Use a for loop that iterates over the list and prints the list to the standard output.
+fun printListToConsole(list: List<String>) {
+    list.forEach(::println)
+}
+
+//Use a list filter to print the days starting with letter ‘T’
+fun startingWithLetter(list: List<String>, letter: String) {
+    list.filter { it.startsWith(letter) }.forEach({ println(it) })
+}
