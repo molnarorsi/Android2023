@@ -4,6 +4,7 @@ import java.util.Base64
 import kotlin.system.exitProcess
 import kotlin.random.Random
 
+
 fun main(args: Array<String>) {
    while(true) {
        print("Enter the number of the exercise: \nEnter 0 to exit!")
@@ -231,3 +232,4 @@ fun arrays() {
 
     println("Average: $avg")
 }
+
