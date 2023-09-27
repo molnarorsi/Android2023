@@ -2,6 +2,7 @@ package main
 
 import java.util.Base64
 import kotlin.system.exitProcess
+import kotlin.random.Random
 
 fun main(args: Array<String>) {
    while(true) {
@@ -32,6 +33,7 @@ fun main(args: Array<String>) {
            }
            6 -> mapOperations()
            7 -> mutableList()
+           8 -> arrays()
        }
    }
 }
@@ -187,4 +189,22 @@ fun mutableList() {
     mutableDay.sort()
     println("\nDays sorted alphabetically: \n")
     mutableDay.forEach{print("$it \n")}
+}
+
+//-------------EXERCISE 8.-------------//
+
+fun arrays() {
+    //Generate an array of 10 random integers between 0 and 100, and use forEach to print
+    //each element of the array in a new line.
+    val randomArray = Array(10) { Random.nextInt(101) }
+    println("Elements of the array: ")
+    randomArray.forEach { println(it) }
+    print("\n")
+
+    //Print the array sorted in ascending order
+    val sortedElements = randomArray.sorted()
+    println("The sorted elements are: ")
+    sortedElements.forEach{ println(it) }
+
+
 }
