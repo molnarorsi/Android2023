@@ -197,7 +197,7 @@ fun arrays() {
     //Generate an array of 10 random integers between 0 and 100, and use forEach to print
     //each element of the array in a new line.
     val randomArray = Array(10) { Random.nextInt(101) }
-    println("Elements of the array: ")
+    println("\nElements of the array: ")
     randomArray.forEach { println(it) }
     print("\n")
 
@@ -206,5 +206,28 @@ fun arrays() {
     println("The sorted elements are: ")
     sortedElements.forEach{ println(it) }
 
+    //Check whether the array contains any even number
+    val containsEven = randomArray.any{it % 2 == 0}
+    if(containsEven) {
+        println("The array contains at least one even number.")
+    }
+    else {
+        println("The array doesn't contain any even number.")
+    }
 
+    //Check whether all the numbers are even
+    val allEven = randomArray.all{it % 2 == 0}
+    if(allEven) {
+        println("All the elements of the array are even.")
+    } else {
+        println("Not all the elements are even.")
+    }
+
+    //Calculate the average of generated numbers and print it using forEach
+    val sum = randomArray.sum()
+    val avg = sum.toDouble() / randomArray.size
+
+    randomArray.forEach { println(it) }
+
+    println("Average: $avg")
 }
