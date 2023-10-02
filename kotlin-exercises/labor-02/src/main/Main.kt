@@ -4,7 +4,12 @@ import ListDictionary
 import TreeSetDictionary
 
 fun main(){
-    val dict: IDictionary = TreeSetDictionary
+    exercise1()
+}
+
+
+fun exercise1() {
+    val dict: IDictionary = HashSetDictionary
     println("Number of words: ${dict.size()}")
     var word: String?
     while(true){
