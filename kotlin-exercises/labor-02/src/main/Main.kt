@@ -47,9 +47,26 @@ fun exercise1() {
 
 fun exercise2() {
     val name = "John Smith"
+    print("The monogram of $name is: ")
     println(name.monogram())
+
+    val list = listOf("apple", "pear", "melon")
+    print("Elements of the list are: $list \n")
+    println("Elements separated by '#': ")
+    println(list.joinStringsWithSeparator())
+
+
+    val list2 = listOf("apple", "pear", "strawberry", "melon")
+    print("Elements of the list are: $list2 \n")
+    println("Longest string in the list is: ")
+    println(list2.longestString())
 }
 
 //functions for exercise 2
 fun String.monogram(): String = this.split(" ").map {it.first()}.joinToString ("")
+fun List<String>.joinStringsWithSeparator(separator: String = "#") = this.joinToString(separator) {it}
+fun List<String>.longestString() = this.maxByOrNull { it.length }
 
+fun exercise3() {
+
+}
