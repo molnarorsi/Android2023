@@ -1,9 +1,10 @@
 package main
 import IDictionary
 import ListDictionary
+import TreeSetDictionary
 
 fun main(){
-    val dict: IDictionary = ListDictionary
+    val dict: IDictionary = TreeSetDictionary
     println("Number of words: ${dict.size()}")
     var word: String?
     while(true){
