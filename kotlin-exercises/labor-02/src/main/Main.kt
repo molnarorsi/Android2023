@@ -76,7 +76,7 @@ fun exercise3() {
     val dates = mutableListOf<Date>()
     while(dates.size < 10) {
         val rand = Date(
-            Random.nextInt(1000,3000),
+            Random.nextInt(1800,2080),
             Random.nextInt(1, 21),
             Random.nextInt(1, 37)
         )
@@ -91,4 +91,19 @@ fun exercise3() {
 
     println("\nValid dates are: ")
     dates.forEach{ println(it) }
+
+    println("\nSorted dates are: ")
+    dates.sort()
+    dates.forEach(::println)
+    println()
+
+    println("\nReversed list is: ")
+    dates.reverse()
+    dates.forEach(::println)
+    println()
+
+    println("\nCustom order: ")
+    dates.sortWith(Date)
+    dates.forEach(::println)
+    println()
 }
