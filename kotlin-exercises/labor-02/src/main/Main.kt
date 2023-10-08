@@ -2,6 +2,7 @@ package main
 import IDictionary
 import ListDictionary
 import TreeSetDictionary
+import kotlin.random.Random
 import kotlin.system.exitProcess
 
 fun main(args: Array<String>){
@@ -26,6 +27,7 @@ fun main(args: Array<String>){
             }
             1 -> exercise1()
             2 -> exercise2()
+            3 -> exercise3()
         }
     }
 }
@@ -68,5 +70,25 @@ fun List<String>.joinStringsWithSeparator(separator: String = "#") = this.joinTo
 fun List<String>.longestString() = this.maxByOrNull { it.length }
 
 fun exercise3() {
+    val date = Date()
 
+    println("Invalid dates are: ")
+    val dates = mutableListOf<Date>()
+    while(dates.size < 10) {
+        val rand = Date(
+            Random.nextInt(1000,3000),
+            Random.nextInt(1, 21),
+            Random.nextInt(1, 37)
+        )
+
+        if(rand.isValid()) {
+            dates.add(rand)
+        }
+        else {
+            println(rand)
+        }
+    }
+
+    println("\nValid dates are: ")
+    dates.forEach{ println(it) }
 }
