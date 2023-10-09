@@ -28,6 +28,7 @@ fun main(args: Array<String>){
             1 -> exercise1()
             2 -> exercise2()
             3 -> exercise3()
+            4 -> extra()
         }
     }
 }
@@ -106,4 +107,13 @@ fun exercise3() {
     dates.sortWith(Date)
     dates.forEach(::println)
     println()
+}
+
+fun extra() {
+    val originalText = "Now is not the time for sleep, now is the time for party!"
+    val generator = TextGenerator(originalText)
+    val wordMap = generator.learnWords()
+    val generatedText = generator.generateText(wordMap)
+
+    generatedText.forEachIndexed{index, line -> println("${index + 1}. $line") }
 }
