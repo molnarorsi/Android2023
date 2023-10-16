@@ -1,0 +1,60 @@
+What is the capital city of France?
+4 3
+Rome
+Madrid
+Paris
+London
+Which planet is known as the "Red Planet"?
+4 2
+Venus
+Mars
+Jupiter
+Saturn
+Who painted the Mona Lisa?
+4 3
+Pablo Picasso
+Vincent van Gogh
+Leonardo da Vinci
+Michelangelo
+Which element is represented by the chemical symbol "H"?
+4 1
+Hydrogen
+Helium
+Carbon
+Oxygen
+What is the powerhouse of the cell?
+4 3
+Nucleus
+Ribosome
+Mitochondria
+Endoplasmic Reticulum
+Who wrote "Romeo and Juliet"?
+4 1
+William Shakespeare
+Jane Austen
+Charles Dickens
+Mark Twain
+What is the largest mammal in the world?
+4 2
+Elephant
+Blue Whale
+Giraffe
+Hippopotamus
+Which gas do plants absorb from the atmosphere and release oxygen during photosynthesis?
+4 2
+Oxygen
+Carbon Dioxide
+Nitrogen
+Hydrogen
+In which year did Chrisopher Columbus first reach the Americas?
+4 1
+1492
+1588
+1607
+1776
+Who is the author of the Harry Potter book series?
+4 1
+J.K. Rowling
+George R.R. Martin
+Stephen King
+J.R.R. Tolkien
