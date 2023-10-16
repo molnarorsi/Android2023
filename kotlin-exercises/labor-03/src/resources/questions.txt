@@ -4,7 +4,7 @@ Rome
 Madrid
 Paris
 London
-Which planet is known as the "Red Planet"?
+Which planet is known as the Red Planet?
 4 2
 Venus
 Mars
@@ -16,7 +16,7 @@ Pablo Picasso
 Vincent van Gogh
 Leonardo da Vinci
 Michelangelo
-Which element is represented by the chemical symbol "H"?
+Which element is represented by the chemical symbol H?
 4 1
 Hydrogen
 Helium
@@ -28,7 +28,7 @@ Nucleus
 Ribosome
 Mitochondria
 Endoplasmic Reticulum
-Who wrote "Romeo and Juliet"?
+Who wrote Romeo and Juliet?
 4 1
 William Shakespeare
 Jane Austen
