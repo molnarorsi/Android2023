@@ -1,6 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/nav_graph">
+            xmlns:tools="http://schemas.android.com/tools" android:id="@+id/nav_graph"
+            app:startDestination="@id/homeFragment">
 
+    <activity android:id="@+id/splashActivity"
+              android:name="com.example.recipeshub.activities.SplashActivity"
+              android:label="SplashActivity"/>
+    <activity android:id="@+id/mainActivity"
+              android:name="com.example.recipeshub.activities.MainActivity"
+              android:label="MainActivity"/>
+    <fragment android:id="@+id/recipesFragment"
+              android:name="fragments.recipes.RecipesFragment"
+              android:label="fragment_recipes"
+              tools:layout="@layout/fragment_recipes">
+        <action android:id="@+id/action_recipesFragment_to_recipeDetailFragment"
+                app:destination="@id/recipeDetailFragment"/>
+    </fragment>
+    <fragment android:id="@+id/homeFragment"
+              android:name="fragments.home.HomeFragment"
+              android:label="fragment_home"
+              tools:layout="@layout/fragment_home">
+        <action android:id="@+id/action_homeFragment_to_recipesFragment" app:destination="@id/recipesFragment"/>
+        <action android:id="@+id/action_homeFragment_to_profileFragment" app:destination="@id/profileFragment"/>
+    </fragment>
+    <fragment android:id="@+id/profileFragment"
+              android:name="fragments.profile.ProfileFragment"
+              android:label="fragment_profile"
+              tools:layout="@layout/fragment_profile"/>
+    <fragment android:id="@+id/recipeDetailFragment"
+              android:name="fragments.recipes.RecipeDetailFragment"
+              android:label="fragment_recipe_detail"
+              tools:layout="@layout/fragment_recipe_detail"/>
 </navigation>

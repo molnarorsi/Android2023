@@ -5,6 +5,8 @@ import android.content.ContentValues.TAG
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
+import android.os.HandlerThread
 import android.util.Log
 import com.example.recipeshub.databinding.ActivitySplashBinding
 
@@ -15,12 +17,24 @@ class SplashActivity : AppCompatActivity() {
         val binding = ActivitySplashBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.startButton.setOnClickListener {
-            val message = binding.editText.text.toString()
+//        binding.startButton.setOnClickListener {
+//            val message = binding.editText.text.toString()
+//            val intent = Intent(this, MainActivity::class.java)
+//            intent.putExtra("message", message)
+//            startActivity(intent)
+//        }
+
+        // Use a HandlerThread to create a background thread
+        val handlerThread = HandlerThread("SplashHandlerThread", -10)
+        handlerThread.start() // Create a Handler on the new HandlerThread
+        val handler = Handler(handlerThread.looper)
+        handler.postDelayed({
+        // Navigate to MainActivity after the delay
             val intent = Intent(this, MainActivity::class.java)
-            intent.putExtra("message", message)
             startActivity(intent)
-        }
+            finish() },
+            2000)
+
     }
 
     override fun onStart() {
