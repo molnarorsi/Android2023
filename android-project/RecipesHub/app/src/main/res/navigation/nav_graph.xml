@@ -11,7 +11,7 @@
               android:name="com.example.recipeshub.activities.MainActivity"
               android:label="MainActivity"/>
     <fragment android:id="@+id/recipesFragment"
-              android:name="fragments.recipes.RecipesFragment"
+              android:name="fragments.recipe.RecipesFragment"
               android:label="fragment_recipes"
               tools:layout="@layout/fragment_recipes">
         <action android:id="@+id/action_recipesFragment_to_recipeDetailFragment"
@@ -29,7 +29,7 @@
               android:label="fragment_profile"
               tools:layout="@layout/fragment_profile"/>
     <fragment android:id="@+id/recipeDetailFragment"
-              android:name="fragments.recipes.RecipeDetailFragment"
+              android:name="fragments.recipe.RecipeDetailFragment"
               android:label="fragment_recipe_detail"
               tools:layout="@layout/fragment_recipe_detail"/>
 </navigation>

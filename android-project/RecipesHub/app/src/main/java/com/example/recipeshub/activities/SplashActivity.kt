@@ -17,19 +17,10 @@ class SplashActivity : AppCompatActivity() {
         val binding = ActivitySplashBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-//        binding.startButton.setOnClickListener {
-//            val message = binding.editText.text.toString()
-//            val intent = Intent(this, MainActivity::class.java)
-//            intent.putExtra("message", message)
-//            startActivity(intent)
-//        }
-
-        // Use a HandlerThread to create a background thread
         val handlerThread = HandlerThread("SplashHandlerThread", -10)
         handlerThread.start() // Create a Handler on the new HandlerThread
         val handler = Handler(handlerThread.looper)
         handler.postDelayed({
-        // Navigate to MainActivity after the delay
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
             finish() },

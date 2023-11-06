@@ -49,7 +49,7 @@ dependencies {
     implementation("androidx.navigation:navigation-fragment-ktx:$navVersion")
     implementation("androidx.navigation:navigation-ui-ktx:$navVersion")
     implementation("androidx.navigation:navigation-dynamic-features-fragment:$navVersion")
-
+    implementation ("com.google.code.gson:gson:2.10.1")
 
     testImplementation("junit:junit:4.13.2")
 
