@@ -39,12 +39,15 @@ class RecipesFragment : Fragment() {
         }
 
         viewModel.recipesList.observe(viewLifecycleOwner) { recipes ->
-            for(recipe in recipes) {
-                Log.d(TAG, "Recipe name: ${recipe.name}")
-                Log.d(TAG, "Recipe description: ${recipe.description}")
-                Log.d(TAG, "Recipe thumbnail url: ${recipe.thumbnailUrl}")
-                Log.d(TAG, "-------------------------------------------")
-            }
+//            for(recipe in recipes) {
+//                Log.d(TAG, "Recipe name: ${recipe.name}")
+//                Log.d(TAG, "Recipe description: ${recipe.description}")
+//                //Log.d(TAG, "Recipe thumbnail url: ${recipe.thumbnailUrl}")
+//                Log.d(TAG, "-------------------------------------------")
+//            }
+            val adapter = RecipesListAdapter(recipes, requireContext())
+            //get recycler view from layout by id
+            //attach/set adapter
         }
     }
 }
