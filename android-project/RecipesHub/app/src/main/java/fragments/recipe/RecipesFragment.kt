@@ -33,6 +33,7 @@ class RecipesFragment : Fragment() {
 
         val viewModel =
             ViewModelProvider(this).get(RecipeListViewModel::class.java)
+
         context?.let {
             viewModel.fetchRecipeData(it)
         }
@@ -41,6 +42,7 @@ class RecipesFragment : Fragment() {
             for(recipe in recipes) {
                 Log.d(TAG, "Recipe name: ${recipe.name}")
                 Log.d(TAG, "Recipe description: ${recipe.description}")
+                Log.d(TAG, "Recipe thumbnail url: ${recipe.thumbnailUrl}")
                 Log.d(TAG, "-------------------------------------------")
             }
         }
