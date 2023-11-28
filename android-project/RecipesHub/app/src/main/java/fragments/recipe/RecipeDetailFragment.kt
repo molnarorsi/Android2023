@@ -5,7 +5,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.ViewModelProvider
 import com.example.recipeshub.R
+import fragments.recipe.RecipesFragment.Companion.TAG
+import android.util.Log
+
+import fragments.recipe.viewmodel.RecipeListViewModel
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -56,5 +61,21 @@ class RecipeDetailFragment : Fragment() {
                     putString(ARG_PARAM2, param2)
                 }
             }
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val recipeId = arguments?.getInt(RecipesFragment.BUNDLE_EXTRA_SELECTED_RECIPE_ID)
+        Log.d(TAG, "Show details for recipe with ID = $recipeId")
+
+        val viewModel =
+            ViewModelProvider(this)[RecipeListViewModel::class.java]
+
+        recipeId.let{viewModel.fetchRecipeDetail(it)}
+
+        viewModel.recipesList.observe(viewLifecycleOwner) {
+            Log.d(TAG, "Selected recipe's details: $it")
+            it?.let { updateViews(it) }
+        }
     }
 }
