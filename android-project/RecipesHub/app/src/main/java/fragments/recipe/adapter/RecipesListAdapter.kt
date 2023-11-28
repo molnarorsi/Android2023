@@ -51,6 +51,8 @@ class RecipesListAdapter(
         viewHolder.recipeName.text = currentRecipe.name
         viewHolder.recipeDescription.text = currentRecipe.description
 
+        val rating = String.format("%.2f", currentRecipe.userRating.score * 10).toDouble()
+
         Glide.with(context)
             .load(currentRecipe.thumbnailUrl)
             .centerCrop()
