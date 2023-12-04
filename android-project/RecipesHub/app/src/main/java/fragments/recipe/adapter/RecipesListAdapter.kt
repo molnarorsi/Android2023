@@ -25,8 +25,6 @@ class RecipesListAdapter (
         return RecipeItemViewHolder(binding)
     }
 
-    override fun getItemCount(): Int = recipeList.size
-
     override fun onBindViewHolder(holder: RecipeItemViewHolder, position: Int) {
         val currentRecipe = recipeList[position]
 
@@ -35,6 +33,10 @@ class RecipesListAdapter (
 
         Log.d("TAG", "onBindViewHolder: ${currentRecipe.thumbnailUrl}")
 
+        val rating = String.format("%.2f", recipeList[position].userRatings.score!! * 10).toDouble()
+
+        holder.recipeRatingView.text = "$rating/10"
+
         Glide.with(context)
             .load(currentRecipe.thumbnailUrl)
             .centerCrop()
@@ -42,9 +44,7 @@ class RecipesListAdapter (
             .fallback(R.drawable.ic_launcher_background)
             .into(holder.recipeImageView)
 
-        val ratingsLabel = "Rating:"
-        holder.recipeRatingView.text = ratingsLabel
-            .plus(" ").plus(currentRecipe.userRatings.score)
+
     }
 
     fun setData(newLis: List<RecipeModel>) {
@@ -67,4 +67,6 @@ class RecipesListAdapter (
             }
         }
     }
+
+    override fun getItemCount(): Int = recipeList.size
 }
