@@ -1,81 +1,74 @@
 package fragments.recipe
 
+import android.content.ContentValues
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.bumptech.glide.Glide
 import com.example.recipeshub.R
-import fragments.recipe.RecipesFragment.Companion.TAG
-import android.util.Log
+import com.example.recipeshub.databinding.FragmentRecipeDetailBinding
+import fragments.recipe.viewmodel.RecipeDetailViewModel
+import repository.recipe.model.RecipeModel
 
-import fragments.recipe.viewmodel.RecipeListViewModel
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [RecipeDetailFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class RecipeDetailFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
-
+    private lateinit var binding: FragmentRecipeDetailBinding
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
+    ): View {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_recipe_detail, container, false)
-    }
+        binding = FragmentRecipeDetailBinding.inflate(inflater, container, false)
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment RecipeDetailFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            RecipeDetailFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val recipeId = arguments?.getInt(RecipesFragment.BUNDLE_EXTRA_SELECTED_RECIPE_ID)
-        Log.d(TAG, "Show details for recipe with ID = $recipeId")
 
-        val viewModel =
-            ViewModelProvider(this)[RecipeListViewModel::class.java]
+        Log.d(ContentValues.TAG, "show details of recipe with id: $recipeId")
 
-        recipeId.let{viewModel.fetchRecipeDetail(it)}
+        val viewModel = ViewModelProvider(this)[RecipeDetailViewModel::class.java]
 
-        viewModel.recipesList.observe(viewLifecycleOwner) {
-            Log.d(TAG, "Selected recipe's details: $it")
-            it?.let { updateViews(it) }
+        recipeId?.let { viewModel.fetchRecipeData(it) }
+
+        viewModel.recipe.observe(viewLifecycleOwner) {
+            Log.d(ContentValues.TAG, "show details of recipe with id: $it")
+            updateViews(it)
         }
     }
+
+    private fun updateViews(recipeModel: RecipeModel) {
+        binding.recipeTitleView.text = recipeModel.name
+        binding.recipeDescriptionView.text = recipeModel.description
+
+        context?.let {
+            Glide.with(it)
+                .load(recipeModel.thumbnailUrl)
+                .centerCrop()
+                .placeholder(R.drawable.ic_launcher_background)
+                .fallback(R.drawable.ic_launcher_background)
+                .into(binding.recipeImageView)
+        }
+
+        val ratingsLabel = requireActivity().getString(R.string.user_ratings_label)
+
+        binding.recipeRatingsView.text = ratingsLabel.plus(" ").plus(recipeModel.userRatings.score)
+
+        binding.recipeTotalTimeView.text = recipeModel.totalTime.displayTier
+
+        val instructionsString = recipeModel.instructions.joinToString("\n") {
+            it.position.toString().plus(". ").plus(it.displayText)
+        }
+
+        binding.recipeInstructionsView.text = instructionsString
+    }
+
+
 }

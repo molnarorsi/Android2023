@@ -2,10 +2,13 @@ package repository.recipe.model
 
 import repository.userratings.model.UserRatingModel
 
-data class RecipeModel(
+data class RecipeModel (
     val id: Int,
     val name: String,
-    val description: String? = "Default description",
-    val thumbnailUrl: String? = "",
-    val userRating: UserRatingModel
+    val description: String?,
+    val thumbnailUrl: String?,
+    val userRatings: UserRatingsModel,
+    val totalTime: TotalTimeModel,
+    val instructions: List<InstructionsModel>
 )
+

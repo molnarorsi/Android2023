@@ -1,6 +1,7 @@
 package fragments.recipe.adapter
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,55 +14,57 @@ import com.example.recipeshub.R
 import com.example.recipeshub.databinding.RecipeListItemBinding
 import repository.recipe.model.RecipeModel
 
-class RecipesListAdapter(
-    private var recipesList: List<RecipeModel>,
-    private val context: Context) :
-    RecyclerView.Adapter<RecipesListAdapter.RecipeViewHolder>() {
-    class RecipeViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val recipeName: TextView
-        val recipeDescription: TextView
-        val recipePicture: ImageView
-        val ratingsView: TextView
+class RecipesListAdapter (
+    private var recipeList : List<RecipeModel>,
+    private val context: Context,
+    private val onItemClickListener: (RecipeModel) -> Unit
+):RecyclerView.Adapter<RecipesListAdapter.RecipeItemViewHolder>() {
 
-        init {
-            // Define click listener for the ViewHolder's View
-            recipeName = view.findViewById(R.id.recipeTitle)
-            recipeDescription = view.findViewById(R.id.recipeDescription)
-            recipePicture = view.findViewById(R.id.recipePhoto)
-            ratingsView = view.findViewById(R.id.recipeScore)
-
-        }
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecipeItemViewHolder {
+        val binding = RecipeListItemBinding.inflate(LayoutInflater.from(context), parent, false)
+        return RecipeItemViewHolder(binding)
     }
 
-    // Create new views (invoked by the layout manager)
-    override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): RecipeViewHolder {
-        // Create a new view, which defines the UI of the list item
-        val view = LayoutInflater.from(viewGroup.context)
-            .inflate(R.layout.recipe_list_item, viewGroup, false)
+    override fun getItemCount(): Int = recipeList.size
 
-        return RecipeViewHolder(view)
-    }
+    override fun onBindViewHolder(holder: RecipeItemViewHolder, position: Int) {
+        val currentRecipe = recipeList[position]
 
-    // Replace the contents of a view (invoked by the layout manager)
-    override fun onBindViewHolder(viewHolder: RecipeViewHolder, position: Int) {
+        holder.recipeTitleView.text = currentRecipe.name
+        holder.recipeDescriptionView.text = currentRecipe.description
 
-        // Get element from your dataset at this position and replace the
-        // contents of the view with that element
-        val currentRecipe = recipesList[position]
-        viewHolder.recipeName.text = currentRecipe.name
-        viewHolder.recipeDescription.text = currentRecipe.description
-
-        val rating = String.format("%.2f", currentRecipe.userRating.score * 10).toDouble()
+        Log.d("TAG", "onBindViewHolder: ${currentRecipe.thumbnailUrl}")
 
         Glide.with(context)
             .load(currentRecipe.thumbnailUrl)
             .centerCrop()
             .placeholder(R.drawable.ic_launcher_background)
             .fallback(R.drawable.ic_launcher_background)
-            .into(viewHolder.recipePicture)
+            .into(holder.recipeImageView)
 
+        val ratingsLabel = "Rating:"
+        holder.recipeRatingView.text = ratingsLabel
+            .plus(" ").plus(currentRecipe.userRatings.score)
     }
 
-    // Return the size of your dataset (invoked by the layout manager)
-    override fun getItemCount() = recipesList.size
+    fun setData(newLis: List<RecipeModel>) {
+        recipeList = newLis
+    }
+
+    inner class RecipeItemViewHolder(binding: RecipeListItemBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+        val recipeTitleView: TextView = binding.recipeTitle
+        val recipeDescriptionView: TextView = binding.recipeDescription
+        val recipeImageView: ImageView = binding.recipePhoto
+        val recipeRatingView: TextView = binding.recipeScore
+
+        init {
+            binding.root.setOnClickListener {
+                val currentPosition = this.adapterPosition
+                val currentRecipe = recipeList[currentPosition]
+
+                onItemClickListener(currentRecipe)
+            }
+        }
+    }
 }

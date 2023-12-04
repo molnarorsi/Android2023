@@ -11,8 +11,7 @@ class RecipeListViewModel : ViewModel() {
 
     var recipesList: MutableLiveData<List<RecipeModel>> = MutableLiveData()
 
-    fun fetchRecipeData(context: Context) {
-        val recipes = repository.getRecipes(context)
-        recipesList.value = recipes
+    fun fetchRecipesData(context: Context) {
+        recipesList.value = repository.getRecipes(context)
     }
 }

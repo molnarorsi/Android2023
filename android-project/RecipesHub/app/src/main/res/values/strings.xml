@@ -1,6 +1,10 @@
 <resources>
     <string name="app_name">RecipesHub</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="home_fragment_welcome">Welcome!</string>
+    <string name="home_fragment_description">Unleash your culinary creativity</string>
+    <string name="home_fragment_get_started">Get Started</string>
+    <string name="recipehub_logo">RecipesHub Logo</string>
     <string name="user_ratings_label">Ratings</string>
 
 </resources>

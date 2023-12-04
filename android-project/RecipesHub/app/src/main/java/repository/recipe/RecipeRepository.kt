@@ -42,4 +42,8 @@ object RecipeRepository {
     fun insertRecipe(recipeModel: RecipeModel): Boolean {
         return myRecipesList.add(recipeModel)
     }
+
+    fun deleteRecipe(recipeModel: RecipeModel): Boolean {
+        return myRecipesList.remove(recipeModel)
+    }
 }

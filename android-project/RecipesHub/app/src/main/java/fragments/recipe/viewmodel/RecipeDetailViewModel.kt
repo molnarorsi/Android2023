@@ -6,11 +6,12 @@ import repository.recipe.RecipeRepository
 import repository.recipe.model.RecipeModel
 
 class RecipeDetailViewModel : ViewModel() {
+    private val repository = RecipeRepository
+
     var recipe: MutableLiveData<RecipeModel> = MutableLiveData()
 
-    fun fetchRecipeDetail(recipeId: Int) {
-        //val recipeDatabase = RecipeDatabase.
-        val recipe = RecipeRepository.getRecipe(recipeId)
+    fun fetchRecipeData(recipeId: Int) {
+        val recipe = repository.getRecipe(recipeId)
         this.recipe.value = recipe
     }
 }
