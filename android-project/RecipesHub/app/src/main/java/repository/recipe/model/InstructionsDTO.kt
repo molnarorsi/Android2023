@@ -1,13 +1,35 @@
 package repository.recipe.model
 
-data class InstructionsDTO(
-    var position: Int? = null,
-    var display_text: String? = null
+import com.google.gson.annotations.SerializedName
+
+data class InstructionsDTO (
+    val id: Int,
+
+    val appliance: String?,
+
+    @SerializedName("start_time")
+    val startTime: Int,
+
+    @SerializedName("end_time")
+    val endTime: Int,
+
+    val temperature: String?,
+
+    val position: Int,
+
+    @SerializedName("display_text")
+    val displayText: String,
 )
 
-fun InstructionsDTO.toModel() = InstructionsModel(
-    position = this.position,
-    displayText = this.display_text
-)
+fun InstructionsDTO.toModel(): InstructionsModel =
+    InstructionsModel (
+        id = this.id,
+        displayText = this.displayText,
+        time = InstructionTime(
+            startTime = this.startTime,
+            endTime = this.endTime
+        )
+    )
 
-fun List<InstructionsDTO>.toModelList() = this.map { it.toModel() }
+fun List<InstructionsDTO>.toModelList(): List<InstructionsModel> =
+    this.map { it.toModel() }

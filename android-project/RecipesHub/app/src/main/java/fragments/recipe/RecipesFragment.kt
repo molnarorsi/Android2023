@@ -20,64 +20,61 @@ import repository.recipe.model.RecipeModel
 
 class RecipesFragment : Fragment() {
 
-    companion object {
-        private val TAG = RecipesFragment::class.java.canonicalName
-        const val BUNDLE_EXTRA_SELECTED_RECIPE_ID = "selected_recipe_id"
-    }
+    private val TAG: String? = RecipesFragment::class.simpleName
 
-    private lateinit var binding: FragmentRecipesBinding
-    private lateinit var recipesAdapter: RecipesListAdapter
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
+    ): View? {
         // Inflate the layout for this fragment
-        binding = FragmentRecipesBinding.inflate(inflater, container, false)
-        initRecyclerView()
-
-        return binding.root
+        return inflater.inflate(R.layout.fragment_recipes, container, false)
     }
 
-    override fun onViewCreated (view: View, savedInstanceState: Bundle?) {
+    private fun navigateToRecipeDetail(recipe: RecipeModel): Unit {
+        findNavController()
+            .navigate(
+                R.id.action_recipesFragment_to_recipeDetailFragment,
+                bundleOf("recipeId" to recipe.id)
+            )
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val viewModel=ViewModelProvider(this).get(RecipeListViewModel::class.java)
+        val viewModel: RecipeListViewModel = ViewModelProvider(this)[RecipeListViewModel::class.java]
+        val recyclerView: RecyclerView = view.findViewById(R.id.recipesRecyclerView)
 
-        context?.let{
-            viewModel.fetchRecipesData(it)
+        context?.let { viewModel.fetchRecipesData(it) }
+
+        viewModel.recipesList.observe(viewLifecycleOwner) { recipes: List<RecipeModel> ->
+            for (recipe in recipes) {
+                Log.d(TAG, "Recipe name: ${recipe.name}")
+                Log.d(TAG, "Recipe description: ${recipe.name}")
+                Log.d(TAG, "Recipe instruction: ${recipe.instruction}")
+                Log.d(TAG, "----------")
+
+                val adapter = RecipesListAdapter(
+                    recipes,
+                    requireContext(),
+
+                    onItemClick = { currentRecipe: RecipeModel ->
+                        navigateToRecipeDetail(currentRecipe)
+                    },
+
+                    onDetailsClick = { currentRecipe: RecipeModel ->
+                        navigateToRecipeDetail(currentRecipe)
+                    }
+                )
+
+                // Attach adapter to recycler view
+                recyclerView.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
+                recyclerView.adapter = adapter
+            }
         }
-
-        viewModel.recipesList.observe(viewLifecycleOwner){ recipes ->
-            recipesAdapter.setData(recipes)
-            recipesAdapter.notifyItemRangeChanged(0,recipes.lastIndex)
-        }
-    }
-
-    private fun initRecyclerView(){
-        recipesAdapter = RecipesListAdapter(ArrayList(),requireContext(),
-            onItemClickListener = {
-                    recipe-> navigateToRecipeDetails(recipe)
-            })
-        binding.recipesRecyclerView.adapter = recipesAdapter
-        binding.recipesRecyclerView.layoutManager = LinearLayoutManager(context)
-        binding.recipesRecyclerView.addItemDecoration(
-            DividerItemDecoration(
-                activity,
-                DividerItemDecoration.VERTICAL
-            )
-        )
-
-    }
-
-    private fun navigateToRecipeDetails(recipe: RecipeModel){
-        findNavController().navigate(
-            R.id.action_recipesFragment_to_recipeDetailFragment,
-            bundleOf(
-                BUNDLE_EXTRA_SELECTED_RECIPE_ID to recipe.id
-            )
-        )
-
     }
 
 }
