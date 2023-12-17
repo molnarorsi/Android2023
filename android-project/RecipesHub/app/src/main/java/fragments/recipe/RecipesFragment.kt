@@ -48,9 +48,9 @@ class RecipesFragment : Fragment() {
         val viewModel: RecipeListViewModel = ViewModelProvider(this)[RecipeListViewModel::class.java]
         val recyclerView: RecyclerView = view.findViewById(R.id.recipesRecyclerView)
 
-        context?.let { viewModel.fetchRecipesData(it) }
+        context?.let { viewModel.fetchRecipeData(it) }
 
-        viewModel.recipesList.observe(viewLifecycleOwner) { recipes: List<RecipeModel> ->
+        viewModel.recipeList.observe(viewLifecycleOwner) { recipes: List<RecipeModel> ->
             for (recipe in recipes) {
                 Log.d(TAG, "Recipe name: ${recipe.name}")
                 Log.d(TAG, "Recipe description: ${recipe.name}")

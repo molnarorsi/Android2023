@@ -10,42 +10,37 @@ import repository.recipe.model.toModelList
 import java.io.IOException
 
 object RecipeRepository {
-    private val TAG: String? = RecipeRepository::class.java.canonicalName
-    private var recipesList: List<RecipeModel> = emptyList()
-    private var myRecipesList: ArrayList<RecipeModel> = ArrayList()
+
+    private val TAG: String? = RecipeRepository::class.simpleName
+    private var myRecipes : List<RecipeModel>? = emptyList()
 
     fun getRecipes(context: Context): List<RecipeModel> {
         lateinit var jsonString: String
+
         try {
-            jsonString =
-                context.assets.open("all_recipes.json")
-                    .bufferedReader()
-                    .use{
-                        it.readText()
-                    }
-        } catch (ioException: IOException) {
-            Log.e(TAG, "Error occured while reading JSON file: $ioException")
+            jsonString = context.assets.open("recipes.json").bufferedReader().use { it.readText() }
+        } catch (e: Exception) {
+            e.printStackTrace()
         }
 
-        val recipesResponse: RecipesDTO =
-            Gson().fromJson(jsonString, object : TypeToken<RecipesDTO>() {}.type)
+        val recipesResponse: RecipesDTO = Gson().fromJson(jsonString, object: TypeToken<RecipesDTO>() {}.type)
 
-        recipesList = recipesResponse.results.toModelList()
-
-        return recipesList
-    }
-
-    fun getMyRecipes(context: Context) = myRecipesList
-
-    fun insertRecipe(recipeModel: RecipeModel): Boolean {
-        return myRecipesList.add(recipeModel)
-    }
-
-    fun deleteRecipe(recipeModel: RecipeModel): Boolean {
-        return myRecipesList.remove(recipeModel)
+        return recipesResponse.results.toModelList()
     }
 
     fun getRecipeById(context: Context, recipeId: Int): RecipeModel {
         return getRecipes(context).first { it.id == recipeId }
     }
+
+    fun insertMyRecipe(recipe: RecipeModel) {
+        myRecipes = myRecipes?.plus(recipe)
+    }
+
+    fun deleteMyRecipe(recipe: RecipeModel) {
+        
+    }
+
+
+    fun getMyRecipes() : List<RecipeModel>? = this.myRecipes
+
 }

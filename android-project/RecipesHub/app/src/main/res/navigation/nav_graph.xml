@@ -34,6 +34,9 @@
             android:name="fragments.profile.NewRecipeFragment"
             android:label="fragment_new_recipes"
             tools:layout="@layout/fragment_new_recipe" />
+    <action
+            android:id="@+id/action_newRecipeFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
     <fragment android:id="@+id/recipeDetailFragment"
               android:name="fragments.recipe.RecipeDetailFragment"
               android:label="fragment_recipe_detail"
