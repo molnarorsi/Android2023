@@ -47,8 +47,7 @@ class NewRecipeFragment : Fragment() {
                     InstructionsModel(
                         id=0,
                         displayText=binding.newInstruction1.text.toString(),
-                        time = InstructionTime(startTime = 0, endTime = 0)
-                    )
+                        time = InstructionTime(startTime = 0, endTime = 0))
                 ),
                 thumbnailUrl = binding.newPictureURL.text.toString(),
                 userRating = UserRatingModel(countPositive = 10, countNegative = 0, score = 10.0f),

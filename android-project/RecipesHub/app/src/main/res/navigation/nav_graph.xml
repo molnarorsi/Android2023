@@ -33,7 +33,8 @@
             android:id="@+id/newRecipeFragment"
             android:name="fragments.profile.NewRecipeFragment"
             android:label="fragment_new_recipes"
-            tools:layout="@layout/fragment_new_recipe" />
+            tools:layout="@layout/fragment_new_recipe"
+    />
     <action
             android:id="@+id/action_newRecipeFragment_to_profileFragment"
             app:destination="@id/profileFragment" />
@@ -41,4 +42,5 @@
               android:name="fragments.recipe.RecipeDetailFragment"
               android:label="fragment_recipe_detail"
               tools:layout="@layout/fragment_recipe_detail"/>
+
 </navigation>

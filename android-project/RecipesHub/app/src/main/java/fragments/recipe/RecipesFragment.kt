@@ -51,28 +51,28 @@ class RecipesFragment : Fragment() {
         context?.let { viewModel.fetchRecipeData(it) }
 
         viewModel.recipeList.observe(viewLifecycleOwner) { recipes: List<RecipeModel> ->
+            // Initialize adapter outside the loop
+            val adapter = RecipesListAdapter(
+                recipes,
+                requireContext(),
+                onItemClick = { currentRecipe: RecipeModel ->
+                    navigateToRecipeDetail(currentRecipe)
+                },
+                onDetailsClick = { currentRecipe: RecipeModel ->
+                    navigateToRecipeDetail(currentRecipe)
+                }
+            )
+
+            // Attach adapter to recycler view
+            recyclerView.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
+            recyclerView.adapter = adapter
+
+            // Loop for logging if needed
             for (recipe in recipes) {
                 Log.d(TAG, "Recipe name: ${recipe.name}")
-                Log.d(TAG, "Recipe description: ${recipe.name}")
+                Log.d(TAG, "Recipe description: ${recipe.description}")
                 Log.d(TAG, "Recipe instruction: ${recipe.instruction}")
                 Log.d(TAG, "----------")
-
-                val adapter = RecipesListAdapter(
-                    recipes,
-                    requireContext(),
-
-                    onItemClick = { currentRecipe: RecipeModel ->
-                        navigateToRecipeDetail(currentRecipe)
-                    },
-
-                    onDetailsClick = { currentRecipe: RecipeModel ->
-                        navigateToRecipeDetail(currentRecipe)
-                    }
-                )
-
-                // Attach adapter to recycler view
-                recyclerView.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
-                recyclerView.adapter = adapter
             }
         }
     }

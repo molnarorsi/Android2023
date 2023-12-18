@@ -45,17 +45,23 @@ class RecipeDetailFragment : Fragment() {
 
         viewModel.recipe.observe(viewLifecycleOwner) { it ->
 
-            // Set title
+            ///////////////
+            // Set title //
+            ///////////////
 
             val titleView = view.findViewById<TextView>(R.id.detailRecipeTitle)
             titleView.text = it.name
 
-            // Set description
+            ////////////////////
+            // Set description //
+            ////////////////////
 
             val descriptionView = view.findViewById<TextView>(R.id.recipeDescription)
             descriptionView.text = it.description
 
-            // Set image
+            ///////////////
+            // Set image //
+            ///////////////
 
             val imageView = view.findViewById<ImageView>(R.id.detailRecipePhoto)
             context?.let { it1 ->
@@ -67,19 +73,25 @@ class RecipeDetailFragment : Fragment() {
                     .into(imageView)
             }
 
-            // Set ratings
+            /////////////////
+            // Set ratings //
+            /////////////////
 
             val ratingsView = view.findViewById<TextView>(R.id.recipeScore)
             val rating =
                 String.format("%.2f", it.userRating.score * 10).toDouble().toString()
             ratingsView.text = "$rating/10"
 
-            // Set servings
+            //////////////////
+            // Set servings //
+            //////////////////
 
             val servingsView = view.findViewById<TextView>(R.id.detailYieldsText)
             servingsView.text = it.yields.filter { it.isDigit() }
 
-            // Set instructions
+            //////////////////////
+            // Set instructions //
+            //////////////////////
 
             val instructionsView = view.findViewById<TextView>(R.id.detailInstructionView)
             instructionsView.text = ""
@@ -103,7 +115,9 @@ class RecipeDetailFragment : Fragment() {
                 instructionCounter += 1
             }
 
-            // Set keywords
+            //////////////////
+            // Set keywords //
+            //////////////////
 
             val keywordsView = view.findViewById<TextView>(R.id.recipeKeywords)
             keywordsView.text = ""
@@ -120,7 +134,9 @@ class RecipeDetailFragment : Fragment() {
                 keywordCounter += 1
             }
 
-            // Set video
+            ///////////////
+            // Set video //
+            ///////////////
 
             val webView = view.findViewById<android.webkit.WebView>(R.id.videoWebView)
             it.originalVideoUrl?.let { it1 -> webView.loadUrl(it1) }
