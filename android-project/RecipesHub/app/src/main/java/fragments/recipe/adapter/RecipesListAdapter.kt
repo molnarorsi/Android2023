@@ -16,7 +16,7 @@ import com.example.recipeshub.R
 import repository.recipe.model.RecipeModel
 
 class RecipesListAdapter(
-    private var recipeList: List<RecipeModel>,
+    var recipeList: List<RecipeModel>,
     private val context: Context,
     private val onItemClick: (RecipeModel) -> Unit,
     private val onDetailsClick: (RecipeModel) -> Unit
